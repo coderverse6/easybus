@@ -46,10 +46,11 @@ function Header(props) {
     setMobileOpen((prevState) => !prevState);
   };
   const { userRole, loading } = useCheckUserRole();
+  
   const drawer = (
     <Box
       onClick={handleDrawerToggle}
-      sx={{ textAlign: "center", zIndex: "1000", color: "white" }}
+      sx={{ textAlign: "center" }}
     >
       <Typography variant="h6" sx={{ my: 2 }}>
         Easy Bus
@@ -93,7 +94,9 @@ function Header(props) {
         <ListItem disablePadding>
           <ListItemButton sx={{ textAlign: "center" }}>
             <ListItemText>
-              <RouterLink to="/dashboard">Dashboard</RouterLink>
+            {
+              userRole === "admin" && <RouterLink to="/dashboard">Dashboard</RouterLink>
+            }
             </ListItemText>
           </ListItemButton>
         </ListItem>
@@ -320,10 +323,12 @@ function Header(props) {
               keepMounted: true, // Better open performance on mobile.
             }}
             sx={{
-              display: { xs: "block", sm: "none" },
+              display: { xs: "block", sm: "none", lg: "flex" },
               "& .MuiDrawer-paper": {
                 boxSizing: "border-box",
                 width: drawerWidth,
+                zIndex: "1", 
+                color: "white"
               },
             }}
           >
