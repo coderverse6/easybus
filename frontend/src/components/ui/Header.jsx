@@ -26,11 +26,11 @@ const drawerWidth = 240;
 
 function Header(props) {
   const { windows } = props;
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(true);
   const location = useLocation();
   const [fixed, setFixed] = useState(false);
   const { user, userSignOut } = useContext(AuthContext);
-  // const [admin, setAdmin] = useState();
+
   function setFixedFunc() {
     if (window.scrollY >= 80) {
       setFixed(true);
@@ -46,7 +46,7 @@ function Header(props) {
     setMobileOpen((prevState) => !prevState);
   };
   const { userRole, loading } = useCheckUserRole();
-  
+
   const drawer = (
     <Box
       onClick={handleDrawerToggle}
@@ -60,7 +60,7 @@ function Header(props) {
         <ListItem disablePadding>
           <ListItemButton sx={{ textAlign: "center" }}>
             <ListItemText>
-              <RouterLink to="/">Home</RouterLink>
+              <RouterLink style={{ textDecoration: "none",color: "#000000",fontWeight:"bold" }}  to="/">Home</RouterLink>
             </ListItemText>
           </ListItemButton>
         </ListItem>
@@ -68,7 +68,7 @@ function Header(props) {
         <ListItem disablePadding>
           <ListItemButton sx={{ textAlign: "center" }}>
             <ListItemText>
-              <RouterLink to="/search-bus">Search Bus</RouterLink>
+              <RouterLink style={{ textDecoration: "none",color: "#000000",fontWeight:"bold" }}  to="/search-bus">Search Bus</RouterLink>
             </ListItemText>
           </ListItemButton>
         </ListItem>
@@ -76,7 +76,7 @@ function Header(props) {
         <ListItem disablePadding>
           <ListItemButton sx={{ textAlign: "center" }}>
             <ListItemText>
-              <RouterLink to="/about">About</RouterLink>
+              <RouterLink style={{ textDecoration: "none",color: "#000000",fontWeight:"bold" }} to="/about">About</RouterLink>
             </ListItemText>
           </ListItemButton>
         </ListItem>
@@ -85,7 +85,7 @@ function Header(props) {
           <ListItemButton sx={{ textAlign: "center" }}>
             <ListItemText>
               {user?.uid && (
-                <RouterLink to="/my-bookings">My Bookings</RouterLink>
+                <RouterLink style={{ textDecoration: "none", color: "#000000",fontWeight:"bold" }} to="/my-bookings">My Bookings</RouterLink>
               )}
             </ListItemText>
           </ListItemButton>
@@ -94,9 +94,9 @@ function Header(props) {
         <ListItem disablePadding>
           <ListItemButton sx={{ textAlign: "center" }}>
             <ListItemText>
-            {
-              userRole === "admin" && <RouterLink to="/dashboard">Dashboard</RouterLink>
-            }
+              {
+                userRole === "admin" && <RouterLink style={{ textDecoration: "none", color: "#000000",fontWeight:"bold" }} to="/dashboard">Dashboard</RouterLink>
+              }
             </ListItemText>
           </ListItemButton>
         </ListItem>
@@ -134,9 +134,8 @@ function Header(props) {
         <AppBar
           component="nav"
           sx={{
-            backgroundColor: `${
-              fixed || location.pathname !== "/" ? "#212529" : "transparent"
-            }`,
+            backgroundColor: `${fixed || location.pathname !== "/" ? "#212529" : "transparent"
+              }`,
             color: "#000000",
             py: "10px",
             px: "32px",
@@ -323,12 +322,10 @@ function Header(props) {
               keepMounted: true, // Better open performance on mobile.
             }}
             sx={{
-              display: { xs: "block", sm: "none", lg: "flex" },
+              display: { xs: "block", sm: "none" },
               "& .MuiDrawer-paper": {
                 boxSizing: "border-box",
                 width: drawerWidth,
-                zIndex: "1", 
-                color: "white"
               },
             }}
           >
